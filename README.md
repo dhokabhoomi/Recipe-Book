@@ -7,7 +7,7 @@ A basic recipe book web application project. This app will allow users to add, v
 - Build a recipe app with React
 - Use Bootstrap for styling
 - Store user-added recipes in localStorage
-- Fetch public recipe data via RapidAPI
+- Fetch public recipe data
 
 ## 🗂️ Status
 
