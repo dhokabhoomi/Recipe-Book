@@ -1,0 +1,254 @@
+/* === Font Import === */
+@import url("https://fonts.googleapis.com/css2?family=Forum&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sen:wght@400..800&display=swap");
+
+/* === Base Theme Variables === */
+:root {
+  --background-color: #f1f1f1;
+  --primary-color: #241e38;
+  --accent-color: #d9d3f0;
+  --text-color: #1a1a1a;
+  --card-bg: #ffffff;
+  --hover-color: #1b172b;
+  --input-bg: #ffffff;
+  --input-border: #ccc;
+
+  --active-bg-color: #2f214f;
+  --active-text-color: #e6e0ff;
+  --heading-color: #4b367c;
+
+  --logo-font: "Forum", serif;
+  --heading-font: "Playfair Display", serif;
+  --body-font: "Lato", sans-serif;
+}
+
+/* === Dark Theme Override === */
+[data-theme="dark"] {
+  --background-color: #1e1c24;
+  --primary-color: #d9d3f0;
+  --accent-color: #8e80c0;
+  --text-color: #e8e6f0;
+  --card-bg: #2c2936;
+  --hover-color: #3a3450;
+  --input-bg: #302e3a;
+  --input-border: #555;
+
+  --active-bg-color: #a285f7;
+  --active-text-color: #1e1c24;
+  --heading-color: #d2c9f6;
+}
+
+/* === Reset and Base === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* === Header / Navbar === */
+.header {
+  background-color: var(--primary-color);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: var(--logo-font);
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  user-select: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  font-family: var(--body-font);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active-link {
+  color: var(--accent-color);
+  background-color: var(--hover-color);
+}
+
+/* === Main Content === */
+.main-content {
+  padding: 2rem 1rem;
+  max-width: 1100px;
+  margin: 2rem auto 4rem auto;
+  min-height: calc(100vh - 160px);
+}
+
+/* === Welcome Section === */
+.welcome-section h2 {
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 2.2rem;
+  font-family: var(--heading-font);
+}
+
+.welcome-section p {
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 600px;
+}
+
+/* === Recipes Preview === */
+.recipes-preview {
+  margin-top: 3rem;
+}
+
+.recipes-preview h3 {
+  color: var(--heading-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  font-family: var(--heading-font);
+}
+
+.recipe-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.recipe-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  width: 250px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.recipe-card h4 {
+  color: var(--heading-color);
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+  text-align: center;
+  font-family: var(--heading-font);
+}
+
+.recipe-card p {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+/* === Add Recipe Page === */
+h2 {
+  color: var(--heading-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-family: var(--heading-font);
+}
+
+p {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* === Search Bar === */
+.searchbar {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid var(--input-border);
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* === Footer === */
+.footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 1rem 2rem;
+  margin-top: 3rem;
+  user-select: none;
+  font-size: 0.9rem;
+}
+
+.footer p {
+  color: white;
+}
+
+/* === Responsive Tweaks === */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .recipe-cards {
+    justify-content: center;
+  }
+
+  .recipe-card {
+    width: 90%;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+}
