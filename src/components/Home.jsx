@@ -1,4 +1,11 @@
+import { useEffect, useState } from "react";
+
 function Home() {
+  const [recipe, setRecipe] = useState([]);
+  useEffect(() => {
+    const savedRecipe = JSON.parse(localStorage.getItem("recipes")) || [];
+    setRecipe(savedRecipe);
+  }, []);
   return (
     <>
       <section className="welcome-section">
@@ -12,21 +19,24 @@ function Home() {
       <section className="recipes-preview">
         <h3>Featured Recipes</h3>
         <div className="recipe-cards">
-          <article className="recipe-card">
-            <img src="https://via.placeholder.com/150" alt="Recipe 1" />
-            <h4>Spicy Avocado Toast</h4>
-            <p>A quick and healthy breakfast option.</p>
-          </article>
-          <article className="recipe-card">
-            <img src="https://via.placeholder.com/150" alt="Recipe 2" />
-            <h4>Classic Margherita Pizza</h4>
-            <p>Simple, fresh, and always delicious.</p>
-          </article>
-          <article className="recipe-card">
-            <img src="https://via.placeholder.com/150" alt="Recipe 3" />
-            <h4>Hearty Vegetable Soup</h4>
-            <p>Comfort food for chilly days.</p>
-          </article>
+          {recipe.length > 0 ? (
+            recipe.map((r) => (
+              <article key={r.id} className="recipe-card">
+                <img
+                  src={r.image || "https://via.placeholder.com/150"}
+                  alt={r.name}
+                />
+                <h4>{r.name}</h4>
+                <p>
+                  {r.ingredients.length > 50
+                    ? `${r.ingredients.slice(0, 50)}...`
+                    : r.ingredients}
+                </p>
+              </article>
+            ))
+          ) : (
+            <p>No recipes found. Add some!</p>
+          )}
         </div>
       </section>
     </>
