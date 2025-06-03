@@ -1,6 +1,9 @@
 import { useState } from "react";
+import "./AddRecipe.css";
 
-function AddRecipe() {
+function AddRecipe({ onRecipeAdded }) {
+  console.log("AddRecipe component rendered");
+
   const [recipe, setRecipe] = useState({
     name: "",
     ingredients: "",
@@ -8,59 +11,120 @@ function AddRecipe() {
     image: "",
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!recipe.name.trim()) newErrors.name = "Recipe name is required";
+    if (!recipe.ingredients.trim())
+      newErrors.ingredients = "Ingredients are required";
+    if (!recipe.steps.trim())
+      newErrors.steps = "Preparation steps are required";
+    if (recipe.image && !isValidUrl(recipe.image))
+      newErrors.image = "Invalid URL";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const isValidUrl = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const [issubmitting, setIssubmitting] = useState(false);
   const handleChange = (e) => {
-    setRecipe({ ...recipe, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setRecipe((prev) => ({ ...prev, [name]: value }));
+    // issubmitting(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+
+    setIssubmitting(true);
     const newRecipe = {
       ...recipe,
+      name: recipe.name.trim(),
+      ingredients: recipe.ingredients.trim(),
+      steps: recipe.steps.trim(),
+      image: recipe.image.trim(),
       id: Date.now(),
     };
+
     const stored = JSON.parse(localStorage.getItem("recipes")) || [];
     localStorage.setItem("recipes", JSON.stringify([...stored, newRecipe]));
     alert("Recipe Added!");
+
+    if (typeof onRecipeAdded === "function") {
+      onRecipeAdded();
+    }
+
     setRecipe({ name: "", ingredients: "", steps: "", image: "" });
-    // console.log("Recipe submitted", recipe);
+    setIssubmitting(false);
   };
 
   return (
-    <div className="add-reccipe-form">
+    <div className="add-recipe-form">
       <h2>Add a New Recipe</h2>
       <form onSubmit={handleSubmit}>
-        <label>Recipe Name</label>
+        <label htmlFor="name">Recipe Name</label>
         <input
+          id="name"
           type="text"
           name="name"
           value={recipe.name}
           onChange={handleChange}
+          className={errors.name ? "error" : ""}
           required
         />
-        <label>Ingredients </label>
+        {errors.name && <span className="error-message">{errors.name}</span>}
+
+        <label htmlFor="ingredients">Ingredients </label>
         <textarea
+          id="ingredients"
           name="ingredients"
+          placeholder="List ingredients, one per line"
           value={recipe.ingredients}
           onChange={handleChange}
-          placeholder="List ingredients, one per line"
+          className={errors.ingredients ? "error" : ""}
           required
         />
-        <label>Preparation Steps </label>
+        {errors.ingredients && (
+          <span className="error-message">{errors.ingredients}</span>
+        )}
+
+        <label htmlFor="steps">Preparation Steps </label>
         <textarea
+          id="steps"
           name="steps"
           value={recipe.steps}
-          onChange={handleChange}
           placeholder="Describe the steps"
+          onChange={handleChange}
+          className={errors.steps ? "error" : ""}
           required
         />
-        <label>Image </label>
+        {errors.steps && <span className="error-message">{errors.steps}</span>}
+
+        <label htmlFor="image">Image </label>
         <input
+          id="image"
           type="url"
           name="image"
           value={recipe.image}
           onChange={handleChange}
+          className={errors.image ? "error" : ""}
         />
-        <button type="submit">Add Recipe</button>
+        {errors.image && <span className="error-message">{errors.image}</span>}
+
+        <button type="submit" disabled={issubmitting}>
+          {issubmitting ? "Adding Recipe..." : "Add Recipe"}
+        </button>
       </form>
     </div>
   );
