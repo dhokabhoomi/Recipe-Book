@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Home() {
+  const DEFAULT_IMAGE = `https://images.unsplash.com/photo-1555126634-323283e090fa?q=80&w=3035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`;
   const [userRecipe, setUserRecipe] = useState([]);
   const [featuredRecipes, setFeaturedRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +11,7 @@ function Home() {
   useEffect(() => {
     const featuredRecipes = async () => {
       try {
-        const promise = Array.from({ length: 5 }, () =>
+        const promise = Array.from({ length: 6 }, () =>
           fetch("https://www.themealdb.com/api/json/v1/1/random.php").then(
             (res) => res.json()
           )
@@ -62,10 +61,10 @@ function Home() {
                 </p>
                 <div className="recipe-meta">
                   <span className="tag">
-                    <i className="bi bi-tag-fill"></i> {meal.strCategory}
+                    <i className="bi bi-geo-alt-fill"></i> {meal.strArea}
                   </span>
                   <span className="tag">
-                    <i className="bi bi-geo-alt-fill"></i> {meal.strArea}
+                    <i className="bi bi-tag-fill"></i> {meal.strCategory}
                   </span>
                 </div>
               </article>
@@ -83,9 +82,7 @@ function Home() {
             userRecipe.map((r) => (
               <article key={r.id} className="recipe-card">
                 <img
-                  src={
-                    r.image || "https://via.placeholder.com/300x200?text=Recipe"
-                  }
+                  src={r.image?.trim() ? r.image : DEFAULT_IMAGE}
                   alt={r.name}
                 />
                 <h4>{r.name}</h4>
@@ -97,7 +94,7 @@ function Home() {
                     : "No ingredients provided"}
                 </p>
                 <div className="recipe-actions">
-                  <button
+                  {/* <button
                     className="btn-secondary"
                     onClick={() => {
                       const updatedRecipes = userRecipe.filter(
@@ -111,7 +108,7 @@ function Home() {
                     }}
                   >
                     Delete
-                  </button>
+                  </button> */}
                 </div>
               </article>
             ))

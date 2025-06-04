@@ -81,7 +81,8 @@ function AddRecipe({ onRecipeAdded }) {
           value={recipe.name}
           onChange={handleChange}
           className={errors.name ? "error" : ""}
-          required
+          placeholder="Enter recipe name"
+          // required
         />
         {errors.name && <span className="error-message">{errors.name}</span>}
 
@@ -93,7 +94,7 @@ function AddRecipe({ onRecipeAdded }) {
           value={recipe.ingredients}
           onChange={handleChange}
           className={errors.ingredients ? "error" : ""}
-          required
+          // required
         />
         {errors.ingredients && (
           <span className="error-message">{errors.ingredients}</span>
@@ -107,7 +108,7 @@ function AddRecipe({ onRecipeAdded }) {
           placeholder="Describe the steps"
           onChange={handleChange}
           className={errors.steps ? "error" : ""}
-          required
+          // required
         />
         {errors.steps && <span className="error-message">{errors.steps}</span>}
 
@@ -117,6 +118,7 @@ function AddRecipe({ onRecipeAdded }) {
           type="url"
           name="image"
           value={recipe.image}
+          placeholder="Enter recipe url"
           onChange={handleChange}
           className={errors.image ? "error" : ""}
         />

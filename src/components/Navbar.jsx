@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   return (
@@ -22,7 +23,7 @@ function Navbar() {
           to="/Search"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
-          Search
+          <i className="bi bi-search"></i>
         </NavLink>
       </div>
     </nav>
