@@ -2,8 +2,6 @@ import { useState } from "react";
 import "./AddRecipe.css";
 
 function AddRecipe({ onRecipeAdded }) {
-  console.log("AddRecipe component rendered");
-
   const [recipe, setRecipe] = useState({
     name: "",
     ingredients: "",
@@ -12,6 +10,8 @@ function AddRecipe({ onRecipeAdded }) {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
@@ -36,18 +36,21 @@ function AddRecipe({ onRecipeAdded }) {
     }
   };
 
-  const [issubmitting, setIssubmitting] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRecipe((prev) => ({ ...prev, [name]: value }));
-    // issubmitting(false);
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+    if (isSuccess) setIsSuccess(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    setIssubmitting(true);
+    setIsSubmitting(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const newRecipe = {
       ...recipe,
       name: recipe.name.trim(),
@@ -55,79 +58,127 @@ function AddRecipe({ onRecipeAdded }) {
       steps: recipe.steps.trim(),
       image: recipe.image.trim(),
       id: Date.now(),
+      createdAt: new Date().toISOString(),
     };
 
     const stored = JSON.parse(localStorage.getItem("recipes")) || [];
     localStorage.setItem("recipes", JSON.stringify([...stored, newRecipe]));
-    alert("Recipe Added!");
+    setIsSuccess(true);
 
     if (typeof onRecipeAdded === "function") {
       onRecipeAdded();
     }
 
     setRecipe({ name: "", ingredients: "", steps: "", image: "" });
-    setIssubmitting(false);
+    setIsSubmitting(false);
+
+    setTimeout(() => setIsSuccess(false), 3000);
   };
 
   return (
-    <div className="add-recipe-form">
-      <h2>Add a New Recipe</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Recipe Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value={recipe.name}
-          onChange={handleChange}
-          className={errors.name ? "error" : ""}
-          placeholder="Enter recipe name"
-          // required
-        />
-        {errors.name && <span className="error-message">{errors.name}</span>}
+    <div className="container">
+      <div className="add-recipe-container fade-in">
+        <div className="form-card">
+          <h2 className="form-title">Add a New Recipe</h2>
+          <p className="form-subtitle">
+            Share your culinary creation with the community
+          </p>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">
+                Recipe Name *
+              </label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                value={recipe.name}
+                onChange={handleChange}
+                className={`form-input ${errors.name ? "error" : ""}`}
+                placeholder="Enter a delicious recipe name"
+              />
+              {errors.name && (
+                <span className="error-message">{errors.name}</span>
+              )}
+            </div>
 
-        <label htmlFor="ingredients">Ingredients </label>
-        <textarea
-          id="ingredients"
-          name="ingredients"
-          placeholder="List ingredients, one per line"
-          value={recipe.ingredients}
-          onChange={handleChange}
-          className={errors.ingredients ? "error" : ""}
-          // required
-        />
-        {errors.ingredients && (
-          <span className="error-message">{errors.ingredients}</span>
-        )}
+            <div className="form-group">
+              <label htmlFor="ingredients" className="form-label">
+                Ingredients*
+              </label>
+              <textarea
+                id="ingredients"
+                name="ingredients"
+                value={recipe.ingredients}
+                onChange={handleChange}
+                className={`form-textarea ${errors.ingredients ? "error" : ""}`}
+                placeholder="List ingredients, one per line&#10;e.g., 2 cups flour&#10;1 tsp salt&#10;3 eggs"
+              />
+              {errors.ingredients && (
+                <span className="error-message">{errors.ingredients}</span>
+              )}
+            </div>
 
-        <label htmlFor="steps">Preparation Steps </label>
-        <textarea
-          id="steps"
-          name="steps"
-          value={recipe.steps}
-          placeholder="Describe the steps"
-          onChange={handleChange}
-          className={errors.steps ? "error" : ""}
-          // required
-        />
-        {errors.steps && <span className="error-message">{errors.steps}</span>}
+            <div className="form-group">
+              <label htmlFor="steps" className="form-label">
+                Preparation Steps*
+              </label>
+              <textarea
+                id="steps"
+                name="steps"
+                value={recipe.steps}
+                onChange={handleChange}
+                className={`form-textarea ${errors.steps ? "error" : ""}`}
+                placeholder="Describe the cooking steps in detail..."
+              />
+              {errors.steps && (
+                <span className="error-message">{errors.steps}</span>
+              )}
+            </div>
 
-        <label htmlFor="image">Image </label>
-        <input
-          id="image"
-          type="url"
-          name="image"
-          value={recipe.image}
-          placeholder="Enter recipe url"
-          onChange={handleChange}
-          className={errors.image ? "error" : ""}
-        />
-        {errors.image && <span className="error-message">{errors.image}</span>}
+            <div className="form-group">
+              <label htmlFor="image" className="form-label">
+                Image URL (Optional)
+              </label>
+              <input
+                id="image"
+                type="url"
+                name="image"
+                value={recipe.image}
+                onChange={handleChange}
+                className={`form-input ${errors.image ? "error" : ""}`}
+                placeholder="https://example.com/recipe-image.jpg"
+              />
+              {errors.image && (
+                <span className="error-message">{errors.image}</span>
+              )}
+            </div>
 
-        <button type="submit" disabled={issubmitting}>
-          {issubmitting ? "Adding Recipe..." : "Add Recipe"}
-        </button>
-      </form>
+            {isSuccess && (
+              <div className="sucess-alert" style={{ marginBottom: "1rem" }}>
+                Recipe added successfully!
+              </div>
+            )}
+
+            <div className="form-action">
+              <button
+                type="submit"
+                className="btn btn-primary btn-large"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="loading-spinner"></div>
+                    Adding Recipe...
+                  </>
+                ) : (
+                  <> Add Recipe </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
