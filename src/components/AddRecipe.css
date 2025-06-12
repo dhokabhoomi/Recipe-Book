@@ -20,21 +20,20 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--gradient-primary);
+  background: var(--primary-color);
 }
 
 .form-title {
   font-family: var(--heading-font);
-  color: var(--heading-color);
+  color: var(--primary-color);
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 2rem;
 }
 
 .form-subtitle {
   text-align: center;
-  color: #6b7280;
+  color: var(--text-lighter);
   margin-bottom: 3rem;
   font-size: 1.1rem;
 }
@@ -81,9 +80,9 @@
 }
 
 .success-alert {
-  background-color: #ecfdf5;
+  background: var(--success-bg);
   border: 1px solid #10b981;
-  color: #065f46;
+  color: var(--success-color);
   padding: 1rem;
   border-radius: var(--border-radius-sm);
   margin-bottom: 2rem;

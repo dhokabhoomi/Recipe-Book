@@ -155,12 +155,12 @@ function AddRecipe({ onRecipeAdded }) {
             </div>
 
             {isSuccess && (
-              <div className="sucess-alert" style={{ marginBottom: "1rem" }}>
+              <div className="success-alert" aria-live="polite">
                 Recipe added successfully!
               </div>
             )}
 
-            <div className="form-action">
+            <div className="form-actions">
               <button
                 type="submit"
                 className="btn btn-primary btn-large"
