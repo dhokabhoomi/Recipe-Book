@@ -15,17 +15,9 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="container nav-container">
-        {/* <div className="nav-container"> */}
         <div className="logo">RecipeRipple</div>
         <div className="nav-right">
-          <NavLink
-            to="/Search"
-            // className={({ isActive }) =>
-            //   `search-link ${isActive ? "active-link" : ""}`
-            // }
-            className="search-link"
-            onClick={closeMenu}
-          >
+          <NavLink to="/Search" className="search-link" onClick={closeMenu}>
             <i className="bi bi-search"></i>
           </NavLink>
 
@@ -33,6 +25,8 @@ function Navbar() {
             className="hamburger"
             onClick={toggleMenu}
             aria-label="Toggle navigation"
+            aria-expanded={isOpen}
+            aria-controls="navbar-menu"
           >
             {isOpen ? (
               <i className="bi bi-x"></i>
@@ -41,26 +35,16 @@ function Navbar() {
             )}
           </button>
 
-          <div className={`nav-links ${isOpen ? "open" : ""}`}>
-            <NavLink
-              to="/"
-              end
-              onClick={closeMenu}
-              // className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
+          <div id="navbar-menu" className={`nav-links ${isOpen ? "open" : ""}`}>
+            <NavLink to="/" end onClick={closeMenu}>
               Home
             </NavLink>
-            <NavLink
-              to="/AddRecipe"
-              onClick={closeMenu}
-              // className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
+            <NavLink to="/AddRecipe" onClick={closeMenu}>
               Add Recipe
             </NavLink>
           </div>
         </div>
       </div>
-      {/* </div> */}
     </nav>
   );
 }
