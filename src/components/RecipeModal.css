@@ -1,0 +1,427 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  max-width: 800px;
+  width: 100%;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-heavy);
+  overflow: hidden;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: slideIn 0.4s ease-out;
+  border: 1px solid var(--card-border);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(36, 30, 56, 0.1);
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.modal-close:hover {
+  background: rgba(36, 30, 56, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-header {
+  position: relative;
+  background-color: var(--secondary-color);
+  /* color: #456da8; */
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid var(--secondary-dark);
+}
+
+.modal-recipe-image {
+  width: 200px;
+  height: 120px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.modal-header-content {
+  flex: 1;
+}
+
+.modal-recipe-title {
+  font-family: var(--heading-font);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  color: var(--primary-color);
+  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
+}
+
+.recipe-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--secondary-dark);
+}
+
+.meta-tag i {
+  font-size: 0.85rem;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2.5rem 2rem;
+}
+
+.recipe-section {
+  margin-bottom: 3rem;
+}
+
+.recipe-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--secondary-lightest);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 2rem;
+  width: 60px;
+  height: 2px;
+  background-color: var(--primary-color);
+  border-radius: 1px;
+}
+
+/* .section-title i {
+  color: #6366f1;
+  font-size: 1.2rem;
+} */
+
+.ingredients-section {
+  background-color: var(--secondary-lightest);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid var(--secondary-light);
+}
+
+.ingredients-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--primary-color);
+  border: 1px solid var(--card-border);
+  transition: all 0.2s ease;
+}
+
+.ingredient-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(36, 30, 56, 0.1);
+  border-color: var(--primary-lighter);
+}
+
+.ingredient-bullet {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.instructions-section {
+  border-radius: 16px;
+  padding-top: 2rem;
+}
+
+.instructions-content {
+  color: var(--text-color);
+}
+
+.instructions-list {
+  padding-left: 0;
+  counter-reset: step-counter;
+  list-style: none;
+}
+
+.instruction-item {
+  counter-increment: step-counter;
+  position: relative;
+  padding: 1.25rem 1.5rem 1.25rem 4rem;
+  margin-bottom: 1rem;
+  background: var(--secondary-lighter);
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  border: 1px solid var(--secondary-light);
+  transition: all 0.2s ease;
+  color: var(--text-color);
+}
+
+.instruction-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(36, 30, 56, 0.08);
+  border-color: var(--primary-lighter);
+}
+
+.instruction-item::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 1rem;
+  top: 1.25rem;
+  width: 28px;
+  height: 28px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.instructions-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.instruction-paragraph {
+  padding: 1.25rem;
+  background: white;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  border: 1px solid var(--card-border);
+  transition: all 0.2s ease;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.instruction-paragraph:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(36, 30, 56, 0.08);
+  border-color: var(--primary-lighter);
+}
+
+.instruction-paragraph::before {
+  content: "•";
+  position: absolute;
+  left: 1.25rem;
+  top: 1.25rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.no-instructions {
+  text-align: center;
+  color: var(--text-lighter);
+  font-style: italic;
+  padding: 2rem;
+  background: var(--secondary-lighter);
+  border-radius: 12px;
+  border: 2px dashed var(--secondary-dark);
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem;
+  background-color: var(--secondary-lightest);
+  border-top: 1px solid var(--secondary-light);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--error-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+  background-color: #dc2626;
+}
+
+.delete-btn i {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    border-radius: 16px;
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .modal-recipe-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .modal-recipe-title {
+    font-size: 1.8rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem 1rem;
+  }
+
+  .recipe-section {
+    margin-bottom: 2rem;
+  }
+
+  .ingredients-section,
+  .instructions-section {
+    padding: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .instruction-item {
+    padding: 1rem 1.25rem 1rem 3.5rem;
+  }
+
+  .instruction-paragraph {
+    padding: 1rem 1.25rem 1rem 2.5rem;
+  }
+
+  .modal-close {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .modal-footer {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-recipe-title {
+    font-size: 1.5rem;
+  }
+
+  .instruction-item,
+  .instruction-paragraph {
+    font-size: 0.95rem;
+    padding-left: 3rem;
+  }
+
+  .ingredients-list {
+    gap: 0.5rem;
+  }
+
+  .ingredient-item {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+}
