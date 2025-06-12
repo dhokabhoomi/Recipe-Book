@@ -20,7 +20,7 @@
   font-weight: 700;
   margin-bottom: 1.25rem;
   line-height: 1.2;
-  color: var(--heading-color);
+  color: var(--primary-color);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -51,7 +51,7 @@
   flex-wrap: wrap;
   gap: 2.5rem;
   margin-top: 2rem;
-  color: var(--heading-color);
+  color: var(--primary-color);
 }
 
 .stat-item {
