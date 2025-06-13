@@ -1,36 +1,84 @@
-import { useState } from "react";
+import { lazy, Suspense, useCallback, useMemo, useRef, useState } from "react";
 import "./Search.css";
+import RecipeCard from "./RecipeCard";
+import { useDebounce } from "./hooks/useDebounce";
+
+// Lazy-load RecipeModal
+const RecipeModal = lazy(() => import("./RecipeModal"));
 
 function Search() {
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [error, setError] = useState("");
+  const cache = useRef(new Map());
 
-  const handleSearch = async (e) => {
-    const searchQuery = e.target.value;
-    setQuery(searchQuery);
+  // Popular search suggestions
+  const popularSuggestions = useMemo(
+    () => ["Pasta", "Vegetarian", "Breakfast", "Cake", "Chicken"],
+    []
+  );
 
-    if (searchQuery.trim().length > 2) {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`
-        );
-        const data = await response.json();
-        setSearchResult(data.meals || []);
-        setHasSearched(true);
-      } catch (error) {
-        console.log("Search Error.", error);
-        setSearchResult([]);
-      } finally {
-        setLoading(false);
-      }
-    } else {
+  // Executes search via API with query caching and error handling
+  const runSearch = useCallback(async () => {
+    const trimmedQuery = query.trim().toLowerCase();
+    if (trimmedQuery.length <= 2) {
       setSearchResult([]);
       setHasSearched(false);
+      setError("");
+      return;
     }
+    // setLoading(true);
+    if (cache.current.has(trimmedQuery)) {
+      setSearchResult(cache.current.get(trimmedQuery));
+      setHasSearched(true);
+      setError("");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${query.trim()}`
+      );
+      const data = await response.json();
+      const results = data.meals || [];
+      cache.current.set(trimmedQuery, results);
+      setSearchResult(results);
+      setHasSearched(true);
+    } catch (err) {
+      console.error("Search Error", err);
+      setError("Something went wrong. Please try again.");
+      setSearchResult([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [query]);
+
+  useDebounce(runSearch, [query], 500);
+
+  const handleInputChange = (e) => {
+    const input = e.target.value;
+    if (input === query) return;
+    setQuery(input);
+    setQuery(input);
   };
+
+  const handleSuggestionsClick = (suggestion) => {
+    setQuery(suggestion);
+  };
+
+  const clearSearch = () => {
+    setQuery("");
+    setSearchResult([]);
+    setHasSearched(false);
+    setError("");
+  };
+
   return (
     <div className="container">
       <div className="search-container fade-in">
@@ -40,104 +88,111 @@ function Search() {
             Discover delicious recipes from around the world
           </p>
         </div>
-        <div className="seacrh-form">
+        <div className="search-form">
           <input
             type="search"
             className="search-input"
             placeholder="Search for recipes... (e.g., pasta, chicken, dessert)"
             value={query}
-            onChange={handleSearch}
+            onChange={handleInputChange}
+            aria-label="Search recipes"
           />
         </div>
+
         {loading && (
           <div className="loading-container">
             <div className="loading-spinner"></div>
             <span style={{ marginLeft: "1rem" }}>Searching recipes...</span>
           </div>
         )}
-        {hasSearched && !loading && (
-          <div className="search-result">
-            {searchResult.length > 0 ? (
-              <>
-                <div className="results-header">
-                  <span className="result-count">
-                    Found {searchResult.length} recipe
-                    {searchResult.length !== 1 ? "s" : ""} for "{query}"
-                  </span>
-                  <button
-                    className="clear-search"
-                    onClick={() => {
-                      setQuery("");
-                      setSearchResult([]);
-                      setHasSearched(false);
-                    }}
-                  >
-                    Clear Search
-                  </button>
-                </div>
-                <div className="recipe-grid">
-                  {searchResult.map((meal) => (
-                    <article key={meal.idMeal} className="recipe-card">
-                      <img
-                        src={meal.strMealThumb}
-                        alt={meal.strMeal}
-                        className="recipe-image"
-                      />
-                      <div className="recipe-content">
-                        <h3 className="recipe-title">{meal.strMeal}</h3>
-                        <p className="recipe-description">
-                          {meal.strInstructions?.slice(0, 120) ||
-                            "No instructions available"}
-                          ...
-                        </p>
-                        <div className="recipe-meta">
-                          <span className="tag">
-                            <i className="bi bi-geo-alt-fill"></i>{" "}
-                            {meal.strArea}
-                          </span>
-                          <span className="tag">
-                            <i className="bi bi-tag-fill"></i>{" "}
-                            {meal.strCategory}
-                          </span>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="no-result">
-                <p>No recipes found for "{query}"</p>
-                <p>
-                  Try searching for something else or check the suggestions
-                  below.
-                </p>
-              </div>
-            )}
+
+        {error && (
+          <div className="no-result error-message">
+            <p>{error}</p>
           </div>
         )}
-        {!hasSearched && !loading && (
-          <div className="search-suggestions">
-            <h3 className="suggestions-title">Popular Searches</h3>
-            <div className="suggestion-tags">
-              {["Pasta", "Vegetarian", "Breakfast", "Cake", "Chicken"].map(
-                (suggestion) => (
+
+        {hasSearched && !loading && !error && searchResult.length > 0 && (
+          <div className="search-result">
+            <div className="results-header">
+              <span className="result-count">
+                Found {searchResult.length} recipe
+                {searchResult.length !== 1 ? "s" : ""} for "{query}"
+              </span>
+              <button
+                className="clear-search"
+                onClick={() => {
+                  clearSearch();
+                }}
+              >
+                Clear Search
+              </button>
+            </div>
+            <div className="recipe-grid">
+              {searchResult.map((meal) => (
+                <RecipeCard
+                  key={meal.idMeal}
+                  recipe={meal}
+                  onSelect={() => setSelectedRecipe(meal)}
+                  isUserRecipe={false}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {hasSearched && !loading && !error && searchResult.length === 0 && (
+          <>
+            <div className="no-result">
+              <p>No recipes found for "{query}"</p>
+              <p>
+                Try searching for something else or check the suggestions below.
+              </p>
+            </div>
+            <div className="search-suggestions">
+              <h3 className="suggestions-title">Popular Searches</h3>
+              <div className="suggestion-tags">
+                {popularSuggestions.map((suggestion) => (
                   <button
                     key={suggestion}
                     className="suggestion-tag"
-                    onClick={() => {
-                      setQuery(suggestion);
-                      handleSearch({ target: { value: suggestion } });
-                    }}
+                    onClick={() => handleSuggestionsClick(suggestion)}
                   >
                     {suggestion}
                   </button>
-                )
-              )}
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {!hasSearched && !loading && !error && (
+          <div className="search-suggestions">
+            <h3 className="suggestions-title">Popular Searches</h3>
+            <div className="suggestion-tags">
+              {popularSuggestions.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  className="suggestion-tag"
+                  onClick={() => handleSuggestionsClick(suggestion)}
+                >
+                  {suggestion}
+                </button>
+              ))}
             </div>
           </div>
         )}
       </div>
+
+      {selectedRecipe && (
+        <Suspense fallback={<div className="modal-fallback">Loading...</div>}>
+          <RecipeModal
+            recipe={selectedRecipe}
+            onClose={() => setSelectedRecipe(null)}
+            onDelete={() => {}}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
