@@ -1,4 +1,4 @@
-import React, { lazy, memo, Suspense, useState } from "react";
+import React, { memo, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,8 +11,8 @@ const Navbar = memo(NavbarComponent);
 import Home from "./components/Home";
 import HeroHeader from "./components/HeroHeader";
 
-const AddRecipe = lazy(() => import("./components/AddRecipe"));
-const Search = lazy(() => import("./components/Search"));
+import AddRecipe from "./components/AddRecipe";
+import Search from "./components/Search";
 
 export default function App() {
   const [dataChanged, setDataChanged] = useState(false);
@@ -30,28 +30,22 @@ export default function App() {
         </header>
 
         <main className="recipe-app__main">
-          <Suspense
-            fallback={
-              <div className="loading-spinner ">Loading recipes...</div>
-            }
-          >
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <HeroHeader />
-                    <Home dataChanged={dataChanged} />
-                  </>
-                }
-              />
-              <Route
-                path="/AddRecipe"
-                element={<AddRecipe onRecipeAdded={handleRecipeAdded} />}
-              />
-              <Route path="/Search" element={<Search />} />
-            </Routes>
-          </Suspense>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <HeroHeader />
+                  <Home dataChanged={dataChanged} />
+                </>
+              }
+            />
+            <Route
+              path="/AddRecipe"
+              element={<AddRecipe onRecipeAdded={handleRecipeAdded} />}
+            />
+            <Route path="/Search" element={<Search />} />
+          </Routes>
         </main>
 
         <footer className="recipe-app__footer ">

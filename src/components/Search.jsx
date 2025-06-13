@@ -1,7 +1,14 @@
-import { lazy, Suspense, useCallback, useMemo, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import "./Search.css";
 import RecipeCard from "./RecipeCard";
-import { useDebounce } from "./hooks/useDebounce";
 
 // Lazy-load RecipeModal
 const RecipeModal = lazy(() => import("./RecipeModal"));
@@ -59,7 +66,22 @@ function Search() {
     }
   }, [query]);
 
-  useDebounce(runSearch, [query], 500);
+  // Debounce input
+  useEffect(() => {
+    const trimmedQuery = query.trim();
+    if (trimmedQuery.length <= 2) {
+      setSearchResult([]);
+      setHasSearched(false);
+      setError("");
+      return;
+    }
+
+    const handler = setTimeout(() => {
+      runSearch();
+    }, 500);
+
+    return () => clearTimeout(handler);
+  }, [query, runSearch]);
 
   const handleInputChange = (e) => {
     const input = e.target.value;
