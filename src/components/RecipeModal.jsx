@@ -1,6 +1,6 @@
 import "./RecipeModal.css";
 
-function RecipeModal({ recipe, onClose, onDelete }) {
+function RecipeModal({ recipe, onClose }) {
   if (!recipe) return null;
 
   function getIngredientsList(recipe) {
@@ -84,7 +84,6 @@ function RecipeModal({ recipe, onClose, onDelete }) {
     }
   }
 
-  const isUserRecipe = Boolean(recipe.id && !recipe.idMeal);
   const recipeName = recipe.strMeal || recipe.name || "Untitled Recipe";
   const recipeImage =
     recipe.strMealThumb || recipe.image || "/defaultImage.jpg";
@@ -113,19 +112,21 @@ function RecipeModal({ recipe, onClose, onDelete }) {
 
           <div className="modal-header-content">
             <h2 className="modal-recipe-title">{recipeName}</h2>
-
-            {(recipe.strArea || recipe.strCategory) && (
+            {(recipe.strArea ||
+              recipe.strCategory ||
+              recipe.area ||
+              recipe.category) && (
               <div className="recipe-meta">
-                {recipe.strArea && (
+                {(recipe.strArea || recipe.area) && (
                   <span className="meta-tag area-tag">
                     <i className="bi bi-geo-alt-fill"></i>
-                    {recipe.strArea}
+                    {recipe.strArea || recipe.area}
                   </span>
                 )}
-                {recipe.strCategory && (
+                {(recipe.strCategory || recipe.category) && (
                   <span className="meta-tag category-tag">
                     <i className="bi bi-tag-fill"></i>
-                    {recipe.strCategory}
+                    {recipe.strCategory || recipe.category}
                   </span>
                 )}
               </div>
@@ -151,26 +152,6 @@ function RecipeModal({ recipe, onClose, onDelete }) {
                 {renderInstructions(recipeInstructions)}
               </div>
             </div>
-
-            {isUserRecipe && (
-              <div className="modal-footer">
-                <button
-                  className="btn btn-danger delete-btn"
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        "Are you sure you want to delete this recipe? This action cannot be undone."
-                      )
-                    ) {
-                      onDelete(recipe.id);
-                      onClose();
-                    }
-                  }}
-                >
-                  <i className="bi bi-trash3"></i>
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </div>
