@@ -102,7 +102,7 @@ function Search() {
   };
 
   return (
-    <div className="container">
+    <div className="container search-page-wrapper">
       <div className="search-container fade-in">
         <div className="search-header">
           <h2 className="search-title">Search Recipes</h2>
@@ -111,6 +111,7 @@ function Search() {
           </p>
         </div>
         <div className="search-form">
+          <i className="bi bi-search search-icon"></i>
           <input
             type="search"
             className="search-input"
