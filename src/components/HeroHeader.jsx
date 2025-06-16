@@ -16,7 +16,7 @@ function HeroHeader() {
         <div className="container">
           <div className="hero-content">
             <div className="hero-image">
-              <img src="/herobanner.jpg" alt="Delicious food" loading="lazy" />
+              <img src="/herobanner.jpg" alt="Delicious food" />
             </div>
             <div className="hero-text">
               <h1>Discover Your Next Favorite Recipe Today!</h1>
