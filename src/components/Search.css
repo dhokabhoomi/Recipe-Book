@@ -20,7 +20,7 @@
 }
 
 .search-title {
-  font-family: var(--logo-font);
+  font-family: var(--heading-font);
   color: var(--heading-color);
   font-size: 3rem;
   font-weight: bold;
