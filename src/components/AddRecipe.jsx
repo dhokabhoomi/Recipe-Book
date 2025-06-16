@@ -7,6 +7,8 @@ function AddRecipe({ onRecipeAdded }) {
     ingredients: "",
     steps: "",
     image: "",
+    category: "",
+    area: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -57,6 +59,8 @@ function AddRecipe({ onRecipeAdded }) {
       ingredients: recipe.ingredients.trim(),
       steps: recipe.steps.trim(),
       image: recipe.image.trim(),
+      category: recipe.category.trim(),
+      area: recipe.area.trim(),
       id: Date.now(),
       createdAt: new Date().toISOString(),
     };
@@ -69,7 +73,14 @@ function AddRecipe({ onRecipeAdded }) {
       onRecipeAdded();
     }
 
-    setRecipe({ name: "", ingredients: "", steps: "", image: "" });
+    setRecipe({
+      name: "",
+      ingredients: "",
+      steps: "",
+      image: "",
+      category: "",
+      area: "",
+    });
     setIsSubmitting(false);
 
     setTimeout(() => setIsSuccess(false), 3000);
@@ -85,6 +96,7 @@ function AddRecipe({ onRecipeAdded }) {
           </p>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
+              {/* Recipe Name */}
               <label htmlFor="name" className="form-label">
                 Recipe Name *
               </label>
@@ -102,6 +114,7 @@ function AddRecipe({ onRecipeAdded }) {
               )}
             </div>
 
+            {/* Ingredients */}
             <div className="form-group">
               <label htmlFor="ingredients" className="form-label">
                 Ingredients*
@@ -119,6 +132,7 @@ function AddRecipe({ onRecipeAdded }) {
               )}
             </div>
 
+            {/* Steps */}
             <div className="form-group">
               <label htmlFor="steps" className="form-label">
                 Preparation Steps*
@@ -136,6 +150,45 @@ function AddRecipe({ onRecipeAdded }) {
               )}
             </div>
 
+            <div className="form-row">
+              {/* Category */}
+              <div className="form-group">
+                <label htmlFor="category" className="form-label">
+                  Category
+                </label>
+                <input
+                  id="category"
+                  name="category"
+                  value={recipe.category}
+                  onChange={handleChange}
+                  className={`form-input ${errors.category ? "error" : ""}`}
+                  placeholder="e.g., Dessert, Main Course"
+                />
+                {errors.category && (
+                  <span className="error-message">{errors.category}</span>
+                )}
+              </div>
+
+              {/* Area / Cuisine */}
+              <div className="form-group">
+                <label htmlFor="area" className="form-label">
+                  Area / Cuisine
+                </label>
+                <input
+                  id="area"
+                  name="area"
+                  value={recipe.area}
+                  onChange={handleChange}
+                  className={`form-input ${errors.area ? "error" : ""}`}
+                  placeholder="e.g., Italian, Indian"
+                />
+                {errors.area && (
+                  <span className="error-message">{errors.area}</span>
+                )}
+              </div>
+            </div>
+
+            {/* Image URL */}
             <div className="form-group">
               <label htmlFor="image" className="form-label">
                 Image URL (Optional)
@@ -154,12 +207,14 @@ function AddRecipe({ onRecipeAdded }) {
               )}
             </div>
 
+            {/* Success message */}
             {isSuccess && (
               <div className="success-alert" aria-live="polite">
                 Recipe added successfully!
               </div>
             )}
 
+            {/* Submit button */}
             <div className="form-actions">
               <button
                 type="submit"

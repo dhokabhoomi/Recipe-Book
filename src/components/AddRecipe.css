@@ -25,10 +25,11 @@
 
 .form-title {
   font-family: var(--heading-font);
-  color: var(--primary-color);
+  color: var(--heading-color);
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
+  margin-bottom: 0.25;
 }
 
 .form-subtitle {
@@ -45,9 +46,18 @@
 .form-label {
   display: block;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-lighter);
   margin-bottom: 0.5rem;
   font-size: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.form-row .form-group {
+  flex: 1;
 }
 
 .form-input,
@@ -66,7 +76,7 @@
 .form-input:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
   box-shadow: 0 0 0 3px rgba(36, 30, 56, 0.1);
 }
 
@@ -105,14 +115,23 @@
 
 @media (max-width: 768px) {
   .form-card {
-    padding: 2rem 1.5rem;
+    width: 100%;
+    padding: 1.5rem 1rem;
   }
 
   .form-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .form-subtitle {
+    font-size: 1rem;
   }
 
   .form-actions {
     flex-direction: column;
+  }
+
+  .form-row .form-group {
+    width: 48%;
   }
 }
