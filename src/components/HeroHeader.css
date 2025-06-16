@@ -78,16 +78,31 @@
 
 /* Tablet */
 @media (max-width: 1024px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+  }
+
+  .hero-text,
+  .hero-image {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .hero-text h1 {
-    font-size: 2rem;
+    font-size: 2.75rem;
   }
 
   .hero-text p {
-    font-size: 1.15rem;
+    font-size: 1.5rem;
   }
 
-  .hero-stats {
-    justify-content: flex-start;
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
   }
 }
 
@@ -114,7 +129,7 @@
 
   .hero-stats {
     justify-content: start;
-    gap: 1rem;
+    gap: 0.25rem;
   }
 
   .stat-item {

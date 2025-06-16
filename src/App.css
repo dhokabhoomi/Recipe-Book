@@ -9,7 +9,7 @@
 
 .recipe-app__main {
   padding: 2rem 1rem;
-  max-width: 1100px;
+  max-width: 90vw;
   margin: 0 auto;
   flex: 1;
 }

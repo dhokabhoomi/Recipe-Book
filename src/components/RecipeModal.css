@@ -49,17 +49,12 @@
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
-  color: var(--primary-color);
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.2s ease;
   z-index: 10;
-}
-
-.modal-close:hover {
-  color: var(--primary-dark);
-  transform: scale(1.1);
 }
 
 .modal-close i {
@@ -69,7 +64,7 @@
 /* Header */
 .modal-header {
   position: relative;
-  background-color: var(--secondary-color);
+  background: var(--secondary-lightest);
   padding: 1.5rem;
   display: flex;
   align-items: flex-start;
@@ -110,13 +105,13 @@
   align-items: center;
   gap: 0.5rem;
   background: rgba(255, 255, 255, 0.15);
-  color: var(--primary-dark);
+  color: var(--secondary-darker);
   padding: 0.5rem 1rem;
-  border-radius: 25px;
+  border-radius: var(--border-radius-sm);
   font-size: 0.9rem;
   font-weight: 500;
   backdrop-filter: blur(10px);
-  border: 1px solid var(--primary-dark);
+  border: 1px solid var(--secondary-darker);
   margin-top: 0.5rem;
 }
 
@@ -128,7 +123,7 @@
 .modal-body {
   flex: 1;
   overflow-y: auto;
-  padding: 2.5rem 2rem;
+  padding: 2rem;
 }
 
 .section-title {
@@ -138,9 +133,10 @@
   font-family: var(--heading-font);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--primary-color);
-  padding-bottom: 0.75rem;
+  color: var(--heading-color);
+  padding-bottom: 0.5rem;
   position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .section-title::after {
@@ -150,7 +146,7 @@
   left: 0;
   width: 60px;
   height: 2px;
-  background-color: var(--primary-color);
+  background-color: var(--heading-color);
   border-radius: 1px;
 }
 
@@ -169,7 +165,7 @@
   gap: 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--primary-color);
+  color: var(--text-lighter);
 }
 
 .ingredient-bullet {
@@ -177,7 +173,7 @@
   justify-content: center;
   align-items: center;
   width: 1.5rem;
-  color: var(--primary-color);
+  color: var(--text-color);
   font-weight: bold;
   font-size: 1.2rem;
   line-height: 1;
@@ -187,11 +183,11 @@
 /* Instructions */
 .instructions-section {
   border-radius: 16px;
-  padding-top: 2rem;
+  padding-top: 4rem;
 }
 
 .instructions-content {
-  color: var(--primary-color);
+  color: var(--text-lighter);
 }
 
 .instructions-list {
@@ -221,7 +217,7 @@
   top: 1.25rem;
   width: 28px;
   height: 28px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -239,7 +235,7 @@
 }
 
 .instruction-paragraph {
-  padding: 1.25rem;
+  padding: 0.25rem;
   border-radius: 12px;
   font-size: 1rem;
   line-height: 1.6;
@@ -253,8 +249,8 @@
   content: "•";
   position: absolute;
   left: 1.25rem;
-  top: 1.25rem;
-  color: var(--primary-color);
+  top: 0.2rem;
+  color: var(--text-color);
   font-weight: bold;
   font-size: 1.2rem;
 }
@@ -307,10 +303,6 @@
     font-size: 1.3rem;
   }
 
-  /* .instruction-item {
-    padding: 1rem 1.25rem 1rem 3.5rem;
-  } */
-
   .modal-close {
     top: 1rem;
     right: 1rem;
@@ -327,7 +319,6 @@
   .instruction-item,
   .instruction-paragraph {
     font-size: 0.95rem;
-    /* padding-left: 3rem; */
   }
 
   .ingredients-list {
@@ -335,7 +326,6 @@
   }
 
   .ingredient-item {
-    /* padding: 0.6rem; */
     font-size: 0.95rem;
   }
 }
