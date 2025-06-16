@@ -1,26 +1,25 @@
 .recipes-section {
-  margin: 3rem 0;
+  margin: 4rem 0;
 }
 
-.section-title {
+.recipes-section__title {
   font-family: var(--heading-font);
-  color: var(--primary-color);
-  font-size: 2.5rem;
+  color: var(--heading-color);
+  font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
-.section-title::after {
+.recipes-section__title::after {
   content: "";
   position: absolute;
   bottom: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 80px;
-  height: 4px;
-  background: var(--primary-color);
+  height: 2px;
+  background: var(--heading-color);
   border-radius: 2px;
 }
 
@@ -29,7 +28,6 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   justify-items: center;
-  margin-top: 3rem;
 }
 
 .recipe-card {
@@ -64,13 +62,28 @@
   padding: 1.5rem;
 }
 
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
 .recipe-title {
   font-family: var(--heading-font);
-  color: var(--primary-color);
+  color: var(--heading-color);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.75rem;
   line-height: 1.3;
+}
+
+.recipe-delete-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .recipe-description {
@@ -84,18 +97,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  background: var(--secondary-color);
-  color: var(--primary-color);
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--border-radius-sm);
-  font-size: 0.85rem;
-  font-weight: 600;
 }
 
 .recipe-actions {
@@ -134,7 +135,7 @@
 }
 
 @media (max-width: 768px) {
-  .section-title {
+  .recipes-section__title {
     font-size: 2rem;
   }
 }

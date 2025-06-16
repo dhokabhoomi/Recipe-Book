@@ -3,7 +3,7 @@ import "./Home.css";
 import { NavLink } from "react-router-dom";
 import RecipeModal from "./RecipeModal";
 import FeaturedRecipes from "./FeaturedRecipes";
-import SavedRecipes from "./SavedRecipes";
+import UserRecipes from "./UserRecipes";
 
 function Home({ dataChanged }) {
   const [userRecipe, setUserRecipe] = useState([]);
@@ -65,7 +65,7 @@ function Home({ dataChanged }) {
         error={error}
         onSelect={setSelectedRecipe}
       />
-      <SavedRecipes
+      <UserRecipes
         recipes={userRecipe}
         onSelect={setSelectedRecipe}
         onDelete={handleDeleteRecipe}
