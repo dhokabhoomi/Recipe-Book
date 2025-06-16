@@ -34,54 +34,20 @@ function RecipeModal({ recipe, onClose }) {
       return <p className="no-instructions">No instructions available.</p>;
     }
 
-    // Split by various line breaks and filter empty lines
     const lines = instructions
       .split(/\r?\n|\r/)
-      .map((line) => line.trim())
+      .map((line) => line.trim().replace(/^((Step\s*)?\d+[.)-]?\s*)?/i, ""))
       .filter((line) => line.length > 0);
 
-    // Check if instructions are numbered
-    const isNumbered = lines.some((line) =>
-      /^\s*(\d+[.)]|\d+\s*[-.])\s+/.test(line)
+    return (
+      <ol className="instructions-list">
+        {lines.map((line, idx) => (
+          <li key={idx} className="instruction-item">
+            {line}
+          </li>
+        ))}
+      </ol>
     );
-    if (isNumbered) {
-      return (
-        <ol className="instructions-list">
-          {lines.map((line, idx) => (
-            <li key={idx} className="instruction-item">
-              {line.replace(/^\s*\d+[.)]\s*|\d+\s*[-.]/, "").trim()}
-            </li>
-          ))}
-        </ol>
-      );
-    } else {
-      // For paragraph-style instructions, split by periods if it's one long sentence
-      if (lines.length === 1 && lines[0].includes(". ")) {
-        const sentences = lines[0]
-          .split(". ")
-          .map((sentence) => sentence.trim())
-          .filter((sentence) => sentence.length > 0);
-        return (
-          <div className="instructions-paragraphs">
-            {sentences.map((sentence, idx) => (
-              <p key={idx} className="instruction-paragraph">
-                {sentence.endsWith(".") ? sentence : sentence + "."}
-              </p>
-            ))}
-          </div>
-        );
-      } else {
-        return (
-          <div className="instructions-paragraphs">
-            {lines.map((line, idx) => (
-              <p key={idx} className="instruction-paragraph">
-                {line}
-              </p>
-            ))}
-          </div>
-        );
-      }
-    }
   }
 
   const recipeName = recipe.strMeal || recipe.name || "Untitled Recipe";
