@@ -13,8 +13,9 @@ const GlobalStyles = () => (
   /* Secondary Color Palette */
   --secondary-color: #fff6c7;
   --secondary-dark: #f4e89c;
+  --secondary-darker: #948002;
   --secondary-light: #fffadc;
-  --secondary-lighter: #fffdef;
+  --secondary-lighter: #fcf9e9;
   --secondary-lightest: #fefff8;
   
   /* Neutral Colors */
@@ -23,6 +24,7 @@ const GlobalStyles = () => (
   --text-light: #4a5568;
   --text-lighter: #6b7280;
   --text-lightest: #9ca3af;
+  --heading-color: #333;
   
   /* Card and UI Colors */
   --card-bg: #ffffff;
@@ -79,6 +81,7 @@ body {
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
@@ -172,15 +175,11 @@ body {
 /* Message Styles */
 .error-message {
   color: var(--error-color);
-  background-color: var(--error-bg);
-  padding: 0.5rem;
-  border-radius: var(--border-radius-sm);
   font-size: 0.875rem;
   margin-top: 0.25rem;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  border: 1px solid #fecaca;
 }
 
 .success-message {
@@ -235,7 +234,7 @@ body {
 
 .form-input.error,
 .form-textarea.error {
-  border-color: var(--error-color);
+  border: 1px solid var(--error-color);
 }
 
 .form-label {
@@ -280,13 +279,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  background-color: var(--secondary-lightest);
+  color: var(--secondary-darker);
   padding: 0.4rem 0.8rem;
   border-radius: var(--border-radius-sm);
   font-size: 0.85rem;
   font-weight: 600;
-  border: 1px solid var(--secondary-dark);
+  border: 1px solid var(--secondary-darker);
 }
 
 /* Responsive Design */

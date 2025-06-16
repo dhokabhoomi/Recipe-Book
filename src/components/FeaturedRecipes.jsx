@@ -3,7 +3,7 @@ import RecipeCard from "./RecipeCard";
 const FeaturedRecipes = ({ recipes, loading, error, onSelect }) => {
   return (
     <section className="recipes-section fade-in">
-      <h2 className="section-title">Featured Recipes</h2>
+      <h2 className="recipes-section__title">Featured Recipes</h2>
       {loading ? (
         <div className="loading-container">
           <div className="loading-spinner" />
