@@ -1,9 +1,6 @@
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
   display: flex;
@@ -17,8 +14,8 @@
 .modal-content {
   background-color: var(--card-bg);
   color: var(--text-color);
-  max-width: 800px;
   width: 100%;
+  max-width: 800px;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-heavy);
   overflow: hidden;
@@ -41,6 +38,7 @@
   }
 }
 
+/* Close button */
 .modal-close {
   position: absolute;
   top: 1.5rem;
@@ -68,14 +66,14 @@
   font-weight: 800;
 }
 
+/* Header */
 .modal-header {
   position: relative;
   background-color: var(--secondary-color);
   padding: 1.5rem;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   gap: 1.5rem;
-  /* border-bottom: 1px solid var(--secondary-dark); */
 }
 
 .modal-recipe-image {
@@ -100,6 +98,7 @@
   color: var(--primary-dark);
 }
 
+/* Meta tags */
 .recipe-meta-tags {
   display: flex;
   flex-wrap: wrap;
@@ -125,6 +124,7 @@
   font-size: 0.85rem;
 }
 
+/* Body */
 .modal-body {
   flex: 1;
   overflow-y: auto;
@@ -146,14 +146,15 @@
 .section-title::after {
   content: "";
   position: absolute;
-  bottom: -2px;
-  left: 2rem;
+  bottom: 0;
+  left: 0;
   width: 60px;
   height: 2px;
   background-color: var(--primary-color);
   border-radius: 1px;
 }
 
+/* Ingredients */
 .ingredients-list {
   list-style: none;
   padding: 0;
@@ -183,6 +184,7 @@
   margin-top: 0.1rem;
 }
 
+/* Instructions */
 .instructions-section {
   border-radius: 16px;
   padding-top: 2rem;
@@ -229,6 +231,7 @@
   font-size: 0.875rem;
 }
 
+/* Instruction paragraphs */
 .instructions-paragraphs {
   display: flex;
   flex-direction: column;
@@ -256,6 +259,7 @@
   font-size: 1.2rem;
 }
 
+/* Fallback */
 .no-instructions {
   text-align: center;
   color: var(--text-lighter);
@@ -266,27 +270,14 @@
   border: 2px dashed var(--secondary-dark);
 }
 
-.modal-footer {
-  padding: 1.5rem 2rem;
-  background-color: var(--secondary-lightest);
-  border-top: 1px solid var(--secondary-light);
-  display: flex;
-  justify-content: flex-end;
-}
-
 @media (max-width: 768px) {
-  .modal-overlay {
-    padding: 0.5rem;
-  }
-
   .modal-content {
-    border-radius: 16px;
     max-height: 95vh;
+    width: 90vw;
+    border-radius: 16px;
   }
 
   .modal-header {
-    flex-direction: column;
-    text-align: center;
     padding: 1.5rem;
     gap: 1.5rem;
   }
@@ -297,7 +288,11 @@
   }
 
   .modal-recipe-title {
-    font-size: 1.8rem;
+    font-size: 1.25rem;
+  }
+
+  .meta-tag {
+    font-size: 0.75rem;
   }
 
   .modal-body {
@@ -308,22 +303,13 @@
     margin-bottom: 2rem;
   }
 
-  .ingredients-section,
-  .instructions-section {
-    padding: 1.5rem;
-  }
-
   .section-title {
     font-size: 1.3rem;
   }
 
-  .instruction-item {
+  /* .instruction-item {
     padding: 1rem 1.25rem 1rem 3.5rem;
-  }
-
-  .instruction-paragraph {
-    padding: 1rem 1.25rem 1rem 2.5rem;
-  }
+  } */
 
   .modal-close {
     top: 1rem;
@@ -331,21 +317,17 @@
     width: 36px;
     height: 36px;
   }
-
-  .modal-footer {
-    padding: 1rem;
-  }
 }
 
 @media (max-width: 480px) {
   .modal-recipe-title {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .instruction-item,
   .instruction-paragraph {
     font-size: 0.95rem;
-    padding-left: 3rem;
+    /* padding-left: 3rem; */
   }
 
   .ingredients-list {
@@ -353,7 +335,7 @@
   }
 
   .ingredient-item {
-    padding: 0.6rem;
+    /* padding: 0.6rem; */
     font-size: 0.95rem;
   }
 }

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import "./Home.css";
-import { NavLink } from "react-router-dom";
 import RecipeModal from "./RecipeModal";
 import FeaturedRecipes from "./FeaturedRecipes";
 import UserRecipes from "./UserRecipes";

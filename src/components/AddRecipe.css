@@ -39,11 +39,11 @@
   font-size: 1.1rem;
 }
 
-.form-group {
-  margin-bottom: 2rem;
+.recipe__form-group {
+  margin-bottom: 1.5rem;
 }
 
-.form-label {
+.recipe__form-label {
   display: block;
   font-weight: 600;
   color: var(--text-lighter);
@@ -56,12 +56,12 @@
   gap: 2rem;
 }
 
-.form-row .form-group {
+.form-row .recipe__form-group {
   flex: 1;
 }
 
-.form-input,
-.form-textarea {
+.recipe__form-input,
+.recipe__form-textarea {
   width: 100%;
   padding: 1rem;
   border: 2px solid var(--input-border);
@@ -73,19 +73,19 @@
   resize: vertical;
 }
 
-.form-input:focus,
-.form-textarea:focus {
+.recipe__form-input :focus,
+.recipe__form-textarea:focus {
   outline: none;
   border: 1px solid var(--primary-color);
   box-shadow: 0 0 0 3px rgba(36, 30, 56, 0.1);
 }
 
-.form-textarea {
+.recipe__form-textarea {
   min-height: 120px;
 }
 
-.form-input.error,
-.form-textarea.error {
+.recipe__form-input .error,
+.recipe__form-textarea.error {
   border-color: var(--error-color);
 }
 
@@ -114,6 +114,9 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 !important;
+  }
   .form-card {
     width: 100%;
     padding: 1.5rem 1rem;
@@ -131,7 +134,12 @@
     flex-direction: column;
   }
 
-  .form-row .form-group {
+  .form-row .recipe__form-group {
     width: 48%;
+  }
+
+  .recipe__form-input,
+  .recipe__form-textarea {
+    padding: 0.5rem;
   }
 }

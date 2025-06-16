@@ -95,9 +95,9 @@ function AddRecipe({ onRecipeAdded }) {
             Share your culinary creation with the community
           </p>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="recipe__form-group">
               {/* Recipe Name */}
-              <label htmlFor="name" className="form-label">
+              <label htmlFor="name" className="recipe__form-label">
                 Recipe Name *
               </label>
               <input
@@ -106,7 +106,7 @@ function AddRecipe({ onRecipeAdded }) {
                 name="name"
                 value={recipe.name}
                 onChange={handleChange}
-                className={`form-input ${errors.name ? "error" : ""}`}
+                className={`recipe__form-input  ${errors.name ? "error" : ""}`}
                 placeholder="Enter a delicious recipe name"
               />
               {errors.name && (
@@ -115,8 +115,8 @@ function AddRecipe({ onRecipeAdded }) {
             </div>
 
             {/* Ingredients */}
-            <div className="form-group">
-              <label htmlFor="ingredients" className="form-label">
+            <div className="recipe__form-group">
+              <label htmlFor="ingredients" className="recipe__form-label">
                 Ingredients*
               </label>
               <textarea
@@ -124,7 +124,9 @@ function AddRecipe({ onRecipeAdded }) {
                 name="ingredients"
                 value={recipe.ingredients}
                 onChange={handleChange}
-                className={`form-textarea ${errors.ingredients ? "error" : ""}`}
+                className={`recipe__form-textarea ${
+                  errors.ingredients ? "error" : ""
+                }`}
                 placeholder="List ingredients, one per line&#10;e.g., 2 cups flour&#10;1 tsp salt&#10;3 eggs"
               />
               {errors.ingredients && (
@@ -133,8 +135,8 @@ function AddRecipe({ onRecipeAdded }) {
             </div>
 
             {/* Steps */}
-            <div className="form-group">
-              <label htmlFor="steps" className="form-label">
+            <div className="recipe__form-group">
+              <label htmlFor="steps" className="recipe__form-label">
                 Preparation Steps*
               </label>
               <textarea
@@ -142,7 +144,9 @@ function AddRecipe({ onRecipeAdded }) {
                 name="steps"
                 value={recipe.steps}
                 onChange={handleChange}
-                className={`form-textarea ${errors.steps ? "error" : ""}`}
+                className={`recipe__form-textarea ${
+                  errors.steps ? "error" : ""
+                }`}
                 placeholder="Describe the cooking steps in detail..."
               />
               {errors.steps && (
@@ -152,8 +156,8 @@ function AddRecipe({ onRecipeAdded }) {
 
             <div className="form-row">
               {/* Category */}
-              <div className="form-group">
-                <label htmlFor="category" className="form-label">
+              <div className="recipe__form-group">
+                <label htmlFor="category" className="recipe__form-label">
                   Category
                 </label>
                 <input
@@ -161,7 +165,9 @@ function AddRecipe({ onRecipeAdded }) {
                   name="category"
                   value={recipe.category}
                   onChange={handleChange}
-                  className={`form-input ${errors.category ? "error" : ""}`}
+                  className={`recipe__form-input  ${
+                    errors.category ? "error" : ""
+                  }`}
                   placeholder="e.g., Dessert, Main Course"
                 />
                 {errors.category && (
@@ -170,8 +176,8 @@ function AddRecipe({ onRecipeAdded }) {
               </div>
 
               {/* Area / Cuisine */}
-              <div className="form-group">
-                <label htmlFor="area" className="form-label">
+              <div className="recipe__form-group">
+                <label htmlFor="area" className="recipe__form-label">
                   Area / Cuisine
                 </label>
                 <input
@@ -179,7 +185,9 @@ function AddRecipe({ onRecipeAdded }) {
                   name="area"
                   value={recipe.area}
                   onChange={handleChange}
-                  className={`form-input ${errors.area ? "error" : ""}`}
+                  className={`recipe__form-input  ${
+                    errors.area ? "error" : ""
+                  }`}
                   placeholder="e.g., Italian, Indian"
                 />
                 {errors.area && (
@@ -189,8 +197,8 @@ function AddRecipe({ onRecipeAdded }) {
             </div>
 
             {/* Image URL */}
-            <div className="form-group">
-              <label htmlFor="image" className="form-label">
+            <div className="recipe__form-group">
+              <label htmlFor="image" className="recipe__form-label">
                 Image URL (Optional)
               </label>
               <input
@@ -199,7 +207,7 @@ function AddRecipe({ onRecipeAdded }) {
                 name="image"
                 value={recipe.image}
                 onChange={handleChange}
-                className={`form-input ${errors.image ? "error" : ""}`}
+                className={`recipe__form-input  ${errors.image ? "error" : ""}`}
                 placeholder="https://example.com/recipe-image.jpg"
               />
               {errors.image && (
