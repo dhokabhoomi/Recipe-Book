@@ -41,7 +41,7 @@
 2. **Navigate into the project directory**
 
    ```bash
-   cd RecipeRipple
+   cd recipe-book
    ```
 
 3. **Install dependencies**
@@ -52,7 +52,7 @@
 
 4. **Start the development server**
    ```bash
-   npm start
+   npm run start
    ```
 
 > ✅ No API key required — TheMealDB offers open access to most endpoints.
