@@ -74,13 +74,21 @@
 | ----------------------------------- |
 | ![Search](screenshots/HomePage.png) |
 
-| Search Recipes                           | Recipe Details                               |
-| ---------------------------------------- | -------------------------------------------- |
-| ![Search](screenshots/SearchRecipes.png) | ![Modal](screenshots/RecipeDetailsModal.png) |
+| Search Recipes                           |
+| ---------------------------------------- |
+| ![Search](screenshots/SearchRecipes.png) |
 
-| Add Custom Recipe                        | Your Saved Recipes                         |
-| ---------------------------------------- | ------------------------------------------ |
-| ![Add](screenshots/AddYourOwnRecipe.png) | ![Saved](screenshots/ViewSavedRecipes.png) |
+| Recipe Details                               |
+| -------------------------------------------- |
+| ![Modal](screenshots/RecipeDetailsModal.png) |
+
+| Add Custom Recipe                        |
+| ---------------------------------------- |
+| ![Add](screenshots/AddYourOwnRecipe.png) |
+
+| Your Saved Recipes                         |
+| ------------------------------------------ |
+| ![Saved](screenshots/ViewSavedRecipes.png) |
 
 ---
 
