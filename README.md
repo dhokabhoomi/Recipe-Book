@@ -1,59 +1,117 @@
-# 🍽️ RecipeRipple
+# Recipe Ripple Web Application
 
-A React-based recipe book web application that lets users discover, add, and search for recipes. It combines user-created recipes stored locally with featured recipes fetched from a public API.
+## 🌐 Overview
 
----
-
-## 📌 Project Goals
-
-- Build a dynamic recipe app using **React** and **React Router**
-- Style the app with **Bootstrap** and custom CSS
-- Display **6 random featured recipes** fetched from [TheMealDB API](https://www.themealdb.com/api.php)
-- Allow users to **add and save their own recipes** locally using `localStorage`
-- Implement **search functionality** to find recipes by name or category (coming soon)
-- Continuously improve UI/UX and app features
+**Recipe Ripple** is a React-based web application that allows users to search for and manage recipes in a simple, interactive interface. It uses **TheMealDB API** to fetch a wide variety of recipes and also lets users add their own, which are stored locally in the browser.
 
 ---
 
-## 🗂️ Current Status
+## 🚀 Features
 
-- Core features implemented:
-  - Featured recipes fetched and displayed on the home page
-  - User can add recipes that persist locally
-  - Basic navigation between Home, Add Recipe, and Search pages
-- Search page and full recipe detail view **in progress**
-- UI design improvements planned
-- Repository structure cleanup ongoing
-
----
-
-## 🚀 Tech Stack
-
-- React with functional components and hooks
-- React Router for client-side routing
-- Bootstrap 5 for responsive UI components and icons
-- LocalStorage for persisting user recipes
-- TheMealDB public API for fetching random featured recipes
+- 🔍 **Search Recipes**: Find meals by keyword using **TheMealDB API**.
+- 📄 **Recipe Details**: View ingredients, instructions, and images in a modal.
+- ➕ **Add Custom Recipes**: Manually add your own recipes with title, ingredients, and instructions.
+- 🗑️ **Delete Recipes**: Remove personal recipes from your local collection.
+- 💾 **LocalStorage Support**: All custom recipes are saved to the browser’s local storage for persistence.
+- ❌ **Error Handling**: Graceful fallbacks for empty searches or API issues.
 
 ---
 
-## 🔗 Live Demo
+## 🛠 Technologies Used
 
-Check it out here: [https://reciperipple.netlify.app](https://reciperipple.netlify.app)
-
----
-
-## 📖 Future Enhancements
-
-- Implement detailed recipe views on card click
-- Add comprehensive search by name and category with API integration
-- Enhance UI/UX design and mobile responsiveness
-- Refactor codebase for better organization and maintainability
+| Category     | Tech Stack                                 |
+| ------------ | ------------------------------------------ |
+| Frontend     | HTML, CSS, JavaScript, React               |
+| Styling      | CSS Modules, Bootstrap                     |
+| API          | [TheMealDB API](https://www.themealdb.com) |
+| State Mgmt   | React hooks (`useState`, `useEffect`)      |
+| Storage      | `localStorage`                             |
+| Package Mgmt | npm                                        |
 
 ---
 
-## 🙌 Contribution
+## 📦 Installation Instructions
 
-Feel free to fork, raise issues, or submit pull requests as the project evolves!
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/dhokabhoomi/RecipeRipple.git
+   ```
+
+2. **Navigate into the project directory**
+
+   ```bash
+   cd RecipeRipple
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+> ✅ No API key required — TheMealDB offers open access to most endpoints.
 
 ---
+
+## 🧑‍🍳 How to Use
+
+- Enter a keyword in the search bar to find recipes.
+- Click on a recipe card to view full details in a modal.
+- Use the "Add Recipe" form to create your own recipe entries.
+- Delete unwanted recipes from your custom list.
+
+---
+
+## 🖼️ Screenshots
+
+| Home Page                           |
+| ----------------------------------- |
+| ![Search](screenshots/HomePage.png) |
+
+| Search Recipes                           | Recipe Details                               |
+| ---------------------------------------- | -------------------------------------------- |
+| ![Search](screenshots/SearchRecipes.png) | ![Modal](screenshots/RecipeDetailsModal.png) |
+
+| Add Custom Recipe                        | Your Saved Recipes                         |
+| ---------------------------------------- | ------------------------------------------ |
+| ![Add](screenshots/AddYourOwnRecipe.png) | ![Saved](screenshots/ViewSavedRecipes.png) |
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! To contribute:
+
+1. Fork the repository
+2. Create a new branch
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Make your changes and commit
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. Push your branch
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Open a Pull Request
+
+---
+
+## 📬 Contact
+
+Open an issue or reach out on GitHub for feedback, bugs, or suggestions.
+
+---
+
+## 🙏 Acknowledgments
+
+- Thanks to [TheMealDB](https://www.themealdb.com) for their free recipe API.
+- Built with love for food, learning, and development.
